@@ -1,0 +1,61 @@
+<div>
+    <h4 class="text-center">Last Validator ID: {{lastValidatorID}}</h4>
+
+    <p-table [value]="validators" [loading]="loading" dataKey="id">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 5rem"></th>
+                <th>ID</th>
+                <th>Address</th>
+                <th>Total stake</th>
+                <th>Own stake</th>
+                <th>Arthera stake</th>
+                <th>Total Delegated</th>
+                <th>Status</th>
+                <th>Missed Blocks</th>
+                <th>Downtime (mins.)</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-validator let-expanded="expanded">
+            <tr>
+                <td>
+                    <button type="button" pButton pRipple [pRowToggler]="validator" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td>{{ validator.id }}</td>
+                <td>{{ validator.validatorAddress }}</td>
+                <td>{{ validator.totalStake }}</td>
+                <td>{{ validator.stake }}</td>
+                <td>{{ validator.artheraStake }}</td>
+                <td>{{ validator.delegatedMe }}</td>
+                <td>
+                    <div class="flex justify-content-center gap-2">
+                        <p-tag *ngIf="validator.isActive" [severity]="'success'" value="Active"></p-tag>
+                        <p-tag *ngIf="validator.isCheater" [severity]="'warning'" value="Cheater"></p-tag>
+                        <p-tag *ngIf="validator.isOffline" [severity]="'warning'" value="Offline"></p-tag>
+                        <p-tag *ngIf="validator.isWithdrawn" [severity]="'danger'" value="Withdrawn"></p-tag>
+                        <p-tag *ngIf="validator.deactivatedTime !== '-' " [severity]="'danger'" value="Deactivated"></p-tag>
+                    </div>
+                </td>
+                <td>{{ validator.missedBlocks}}</td>
+                <td>{{ validator.downtime}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-v>
+            <tr>
+                <td colspan="19">
+                    <div class="p-3">
+                        <p>Created Time: <strong>{{v.createdTime}}</strong></p>
+                        <p>Created Epoch: <strong>{{v.createdEpoch }}</strong></p>
+                        <p>Withdrawn: <strong>{{v.isWithdrawn}}</strong></p>
+                        <p>Stake locked: <strong>{{v.isStakeLocked}}</strong></p>
+                        <p *ngIf="v.isStakeLocked">Stake locked from epoch: <strong>{{v.lockedFromEpoch}}</strong></p>
+                        <p *ngIf="v.isStakeLocked">Stake locked until: <strong>{{v.lockedUntil}}</strong></p>
+                        <p>Deactivated Epoch: <strong>{{v.deactivatedEpoch}}</strong></p>
+                        <p>Deactivated Time: <strong>{{v.deactivatedTime}}</strong></p>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+

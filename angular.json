@@ -1,0 +1,146 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "arthera-validators": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/arthera-validators",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "assert",
+              "jsonschema",
+              "lodash",
+              "password-validator",
+              "qrcode-svg",
+              "@babel/runtime/regenerator",
+              "@ethereumjs/common",
+              "@ethereumjs/tx",
+              "@ethereumjs/util",
+              "ethereum-cryptography/sha256",
+              "ethereum-cryptography/keccak",
+              "@metamask/eth-sig-util",
+              "bn.js",
+              "js-sha3",
+              "bech32",
+              "json-stable-stringify",
+              "hash.js",
+              "eth-rpc-errors",
+              "@metamask/detect-provider",
+              "scrypt-js",
+              "aes-js"
+            ],
+            "polyfills": [
+              "zone.js",
+              "src/polyfills.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "3mb",
+                "maximumError": "4mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "2kb",
+                "maximumError": "4kb"
+              }
+            ],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": true,
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true
+          },
+          "configurations": {
+            "mainnet": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/environment.ts",
+                  "with": "src/app/environments/environment.mainnet.ts"
+                }
+              ]
+            },
+            "testnet2": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/environment.ts",
+                  "with": "src/app/environments/environment.testnet2.ts"
+                }
+              ]
+            },
+            "devnet": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/environments/environment.ts",
+                  "with": "src/app/environments/environment.devnet.ts"
+                }
+              ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "mainnet": {
+              "browserTarget": "arthera-validators:build:mainnet"
+            },
+            "testnet": {
+              "browserTarget": "arthera-validators:build:testnet"
+            },
+            "testnet2": {
+              "browserTarget": "arthera-validators:build:testnet2"
+            },
+            "devnet": {
+              "browserTarget": "arthera-validators:build:devnet"
+            },
+            "development": {
+              "browserTarget": "arthera-validators:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "arthera-validators:build"
+          }
+        },
+      }
+    }
+  }
+}
