@@ -9,7 +9,6 @@
                 <th>Address</th>
                 <th>Total stake</th>
                 <th>Own stake</th>
-                <th>Arthera stake</th>
                 <th>Total Delegated</th>
                 <th>Status</th>
                 <th>Missed Blocks</th>
@@ -25,10 +24,9 @@
                 <td>{{ validator.validatorAddress }}</td>
                 <td>{{ validator.totalStake }}</td>
                 <td>{{ validator.stake }}</td>
-                <td>{{ validator.artheraStake }}</td>
                 <td>{{ validator.delegatedMe }}</td>
                 <td>
-                    <div class="flex justify-content-center gap-2">
+                    <div class="flex justify-content-start gap-2">
                         <p-tag *ngIf="validator.isActive" [severity]="'success'" value="Active"></p-tag>
                         <p-tag *ngIf="validator.isCheater" [severity]="'warning'" value="Cheater"></p-tag>
                         <p-tag *ngIf="validator.isOffline" [severity]="'warning'" value="Offline"></p-tag>
